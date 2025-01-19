@@ -9,7 +9,7 @@ export const Quiz = () => {
 
   useEffect(() => {
     const getQuiz = async () => {
-      const response = await fetch("http://localhost:8080/ping");
+      const response = await fetch("http://localhost:8080/quiz/generate");
       const data = await response.json();
 
       setQuiz(data);
