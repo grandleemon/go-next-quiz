@@ -1,11 +1,12 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {QuizQuestion} from "@/components/quiz/types";
+import type {QuizType} from "@/components/quiz/types";
 import {Question} from "./question";
+import {Timer} from "@/components/timer/timer";
 
 export const Quiz = () => {
-  const [quiz, setQuiz] = useState<null | QuizQuestion[]>(null);
+  const [quiz, setQuiz] = useState<null | QuizType>(null);
 
   useEffect(() => {
     const getQuiz = async () => {
@@ -22,9 +23,12 @@ export const Quiz = () => {
     }
   }, []);
 
-  return Array.isArray(quiz) && quiz.length > 0 && quiz.map((item, questionIndex) => {
-    return <Question {...item} key={questionIndex}/>
-  })
+  return Array.isArray(quiz?.questions) && quiz?.questions.length > 0 && <div>
+    <Timer targetTimestamp={new Date(quiz?.expiresAt).getTime()} />
+    {quiz?.questions.map((item, questionIndex) => {
+      return <Question {...item} key={questionIndex}/>
+    })}
+  </div>
 }
 
 

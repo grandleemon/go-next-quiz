@@ -8,3 +8,9 @@ export interface QuizQuestion {
   answers: QuizAnswer[]
   id: number;
 }
+
+export interface QuizType {
+  id: number;
+  expiresAt: Date;
+  questions: QuizQuestion[]
+}
